@@ -264,7 +264,7 @@ trait HasHellaCache { this: BaseTile =>
   var nDCachePorts = 0
   lazy val dcache: HellaCache = LazyModule(p(BuildHellaCache)(this)(p))
 
-  tlMasterXbar.node := dcache.node
+  tlMasterXbar.node := TLBuffer(BufferParams.none, BufferParams.none, BufferParams.none, BufferParams.none, BufferParams.default) := dcache.node
   dcache.hartIdSinkNodeOpt.map { _ := hartIdNexusNode }
   dcache.mmioAddressPrefixSinkNodeOpt.map { _ := mmioAddressPrefixNexusNode }
 }
